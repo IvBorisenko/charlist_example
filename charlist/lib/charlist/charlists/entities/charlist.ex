@@ -1,9 +1,11 @@
-defmodule Charlist.Charlists.Entities.Charlist do
+defmodule Charlist.Charlists.Entities.CharlistEntity do
   use Ecto.Schema
 
   import Ecto.Changeset
 
+  alias Charlist.Repo
   alias Charlist.Accounts.Entities.User
+  alias Charlist.Items.Entities.Item
 
   @required [
     :wisdom,
@@ -27,11 +29,14 @@ defmodule Charlist.Charlists.Entities.Charlist do
 
     belongs_to :user, User
 
+    many_to_many :items, Item, join_through: "charlists_items"
+
     timestamps()
   end
 
   def create_changeset(%__MODULE__{} = charlist, attrs) do
     charlist
+    |> Repo.preload(:items)
     |> cast(attrs, @required)
     |> validate_required(@required)
     |> validate_number(:wisdom, less_than_or_equal_to: 20, greater_than_or_equal_to: 1)
@@ -42,5 +47,7 @@ defmodule Charlist.Charlists.Entities.Charlist do
     |> validate_number(:intelligence, less_than_or_equal_to: 20, greater_than_or_equal_to: 1)
     |> assoc_constraint(:user)
     |> unique_constraint(:nickname)
+    # Set the association
+    |> put_assoc(:items, [attrs.items])
   end
 end

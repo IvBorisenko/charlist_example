@@ -3,6 +3,8 @@ defmodule Charlist.Items.Entities.Item do
 
   import Ecto.Changeset
 
+  alias Charlist.Charlists.Entities.Charlist
+
   @required [
     :name,
     :cost,
@@ -16,6 +18,8 @@ defmodule Charlist.Items.Entities.Item do
     field :weight, :integer
     field :armor, :integer
     field :damage, :integer
+
+    many_to_many :charlists, Charlist, join_through: "charlists_items"
 
     timestamps()
   end
