@@ -18,7 +18,9 @@ defmodule Charlist.Accounts.Entities.User do
     |> cast(attrs, @required)
     |> validate_required(@required)
     |> unique_constraint(:email, message: "taken")
-    |> validate_format(:password, ~r/^(?=.*\d)(?=.*[a-z])(?=.*[a-zA-Z]).{8,}/, message: "invalid_format")
+    |> validate_format(:password, ~r/^(?=.*\d)(?=.*[a-z])(?=.*[a-zA-Z]).{8,}/,
+      message: "invalid_format"
+    )
     |> put_password_hash()
   end
 
