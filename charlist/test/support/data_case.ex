@@ -24,6 +24,7 @@ defmodule Charlist.DataCase do
       import Ecto.Changeset
       import Ecto.Query
       import Charlist.DataCase
+      import Charlist.Factories
     end
   end
 
