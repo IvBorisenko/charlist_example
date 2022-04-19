@@ -1,7 +1,7 @@
 defmodule CharlistItem do
   use Ecto.Schema
 
-  alias Charlist.Charlists.Entities.Charlist, as: CharlistEntity
+  alias Charlist.Charlists.Entities.CharlistEntity
   alias Charlist.Items.Entities.Item
 
   @primary_key false

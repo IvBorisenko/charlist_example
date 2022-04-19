@@ -11,5 +11,5 @@ defmodule Charlist.Items do
   defdelegate create_item(attrs), to: CreateItem, as: :process
 
   defdelegate get_item(id), to: GetItem, as: :process
-  defdelegate list_items(params), to: ListItems, as: :process
+  defdelegate list_items(params \\ %{}), to: ListItems, as: :process
 end

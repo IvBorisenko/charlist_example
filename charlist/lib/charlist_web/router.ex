@@ -12,6 +12,7 @@ defmodule CharlistWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug ProperCase.Plug.SnakeCaseParams
   end
 
   scope "/", CharlistWeb do
@@ -32,13 +33,19 @@ defmodule CharlistWeb.Router do
   # If your application does not have an admins-only section yet,
   # you can use Plug.BasicAuth to set up some basic authentication
   # as long as you are also using SSL (which you should anyway).
-  if Mix.env() in [:dev, :test] do
-    import Phoenix.LiveDashboard.Router
+  # if Mix.env() in [:dev, :test] do
+  #   import Phoenix.LiveDashboard.Router
 
-    scope "/" do
-      pipe_through :browser
+  #   scope "/" do
+  #     pipe_through :browser
 
-      live_dashboard "/dashboard", metrics: CharlistWeb.Telemetry
-    end
+  #     live_dashboard "/dashboard", metrics: CharlistWeb.Telemetry
+  #   end
+  # end
+
+  scope "/api/v1", CharlistWeb.V1 do
+    pipe_through :api
+
+    resources "/items", ItemController, only: [:index, :show]
   end
 end

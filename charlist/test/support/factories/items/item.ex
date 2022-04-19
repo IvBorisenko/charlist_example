@@ -9,8 +9,9 @@ defmodule Charlist.Factories.Items.ItemFactory do
         weight = Map.get(attrs, :weight, Enum.random(1..20))
         armor = Map.get(attrs, :armor)
         damage = Map.get(attrs, :damage)
-        description = Map.get(attrs, :description, Lorem.characters(10..20))
+        description = Map.get(attrs, :description, Lorem.sentence(10..20))
         name = Map.get(attrs, :name, Internet.user_name())
+        hidden = Map.get(attrs, :hidden, false)
 
         %Item{
           name: sequence(:name, &"#{name}_#{&1}"),
@@ -18,7 +19,8 @@ defmodule Charlist.Factories.Items.ItemFactory do
           weight: weight,
           armor: armor,
           damage: damage,
-          description: description
+          description: description,
+          hidden: hidden
         }
       end
     end

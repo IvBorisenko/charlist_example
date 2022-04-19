@@ -24,6 +24,7 @@ defmodule CharlistWeb.ConnCase do
       import Phoenix.ConnTest
       import CharlistWeb.ConnCase
       import Charlist.DataCase
+      import Charlist.Factories
 
       alias CharlistWeb.Router.Helpers, as: Routes
 

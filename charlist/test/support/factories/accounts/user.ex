@@ -5,7 +5,7 @@ defmodule Charlist.Factories.Accounts.UserFactory do
       alias Charlist.Accounts.Entities.User
 
       def user_factory(attrs) do
-        password = Map.get(attrs, :password, Lorem.characters(8..16))
+        password = Map.get(attrs, :password, Lorem.sentence(8..16))
 
         email = Map.get(attrs, :email, Internet.email())
 

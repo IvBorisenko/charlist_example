@@ -3,12 +3,19 @@ defmodule Charlist.Items.Entities.Item do
 
   import Ecto.Changeset
 
-  alias Charlist.Charlists.Entities.Charlist
+  alias Charlist.Charlists.Entities.CharlistEntity
 
   @required [
     :name,
     :cost,
-    :weight
+    :weight,
+    :hidden
+  ]
+
+  @optional [
+    :description,
+    :armor,
+    :damage
   ]
 
   schema "items" do
@@ -18,15 +25,16 @@ defmodule Charlist.Items.Entities.Item do
     field :weight, :integer
     field :armor, :integer
     field :damage, :integer
+    field :hidden, :boolean, default: false
 
-    many_to_many :charlists, Charlist, join_through: "charlists_items"
+    many_to_many :charlists, CharlistEntity, join_through: "charlists_items"
 
     timestamps()
   end
 
   def create_changeset(%__MODULE__{} = item, attrs) do
     item
-    |> cast(attrs, @required)
+    |> cast(attrs, @required ++ @optional)
     |> validate_required(@required)
     |> validate_number(:cost, greater_than_or_equal_to: 0)
     |> validate_number(:weight, greater_than_or_equal_to: 0)
