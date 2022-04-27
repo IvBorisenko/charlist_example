@@ -1,8 +1,8 @@
 defmodule Charlist.Accounts.Queries.ListUsers do
-  alias Charlist.Repo
   alias Charlist.Accounts.Entities.User
+  alias Charlist.Repo
 
-  def process() do
+  def process do
     Repo.all(User)
   end
 end

@@ -1,6 +1,6 @@
 defmodule Charlist.Charlists.Commands.CreateCharlist do
-  alias Charlist.Repo
   alias Charlist.Charlists.Entities.CharlistEntity
+  alias Charlist.Repo
 
   def process(attrs) do
     %CharlistEntity{}

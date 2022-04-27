@@ -1,8 +1,8 @@
 defmodule Charlist.Factories.Items.ItemFactory do
   defmacro __using__(_opts) do
     quote do
-      alias Faker.{Internet, Lorem, Person}
       alias Charlist.Items.Entities.Item
+      alias Faker.{Internet, Lorem, Person}
 
       def item_factory(attrs) do
         cost = Map.get(attrs, :cost, Enum.random(1..20))

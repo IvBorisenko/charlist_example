@@ -1,8 +1,8 @@
 defmodule Charlist.Factories.Accounts.UserFactory do
   defmacro __using__(_opts) do
     quote do
-      alias Faker.{Internet, Lorem, Person}
       alias Charlist.Accounts.Entities.User
+      alias alias Faker.{Internet, Lorem, Person}
 
       def user_factory(attrs) do
         password = Map.get(attrs, :password, Lorem.sentence(8..16))

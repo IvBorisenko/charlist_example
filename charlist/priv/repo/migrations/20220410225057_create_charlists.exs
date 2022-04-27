@@ -4,7 +4,7 @@ defmodule Charlist.Repo.Migrations.CreateCharlists do
   def change do
     create table(:charlists) do
       add :wisdom, :integer, nill: false
-      add :strenght, :integer, nill: false
+      add :strength, :integer, nill: false
       add :dexterity, :integer, nill: false
       add :charisma, :integer, nill: false
       add :constitution, :integer, nill: false

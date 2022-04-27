@@ -1,7 +1,5 @@
 defmodule Charlist.Items do
-  alias Charlist.Items.Commands.{
-    CreateItem
-  }
+  alias Charlist.Items.Commands.CreateItem
 
   alias Charlist.Items.Queries.{
     GetItem,

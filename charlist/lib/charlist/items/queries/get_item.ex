@@ -1,8 +1,8 @@
 defmodule Charlist.Items.Queries.GetItem do
   import Ecto.Query, only: [from: 2]
 
-  alias Charlist.Repo
   alias Charlist.Items.Entities.Item
+  alias Charlist.Repo
 
   def process(id) do
     Item

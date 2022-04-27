@@ -1,6 +1,6 @@
 defmodule Charlist.Items.Commands.CreateItem do
-  alias Charlist.Repo
   alias Charlist.Items.Entities.Item
+  alias Charlist.Repo
 
   def process(attrs) do
     %Item{}

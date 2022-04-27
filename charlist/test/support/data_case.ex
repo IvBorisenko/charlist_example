@@ -16,6 +16,9 @@ defmodule Charlist.DataCase do
 
   use ExUnit.CaseTemplate
 
+  alias Charlist.Repo
+  alias Ecto.Adapters.SQL.Sandbox
+
   using do
     quote do
       alias Charlist.Repo
@@ -29,8 +32,8 @@ defmodule Charlist.DataCase do
   end
 
   setup tags do
-    pid = Ecto.Adapters.SQL.Sandbox.start_owner!(Charlist.Repo, shared: not tags[:async])
-    on_exit(fn -> Ecto.Adapters.SQL.Sandbox.stop_owner(pid) end)
+    pid = Sandbox.start_owner!(Repo, shared: not tags[:async])
+    on_exit(fn -> Sandbox.stop_owner(pid) end)
     :ok
   end
 

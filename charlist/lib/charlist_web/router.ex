@@ -46,6 +46,7 @@ defmodule CharlistWeb.Router do
   scope "/api/v1", CharlistWeb.V1 do
     pipe_through :api
 
+    resources "/charlists", CharlistController, only: [:index, :show, :create, :update]
     resources "/items", ItemController, only: [:index, :show]
   end
 end

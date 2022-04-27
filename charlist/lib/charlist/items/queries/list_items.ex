@@ -1,8 +1,10 @@
 defmodule Charlist.Items.Queries.ListItems do
+  @moduledoc false
+
   import Ecto.Query, only: [from: 2]
 
-  alias Charlist.Repo
   alias Charlist.Items.Entities.Item
+  alias Charlist.Repo
 
   # %{name: "John", cost: 10} = params
   def process(params) do

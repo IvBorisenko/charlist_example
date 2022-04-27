@@ -1,6 +1,6 @@
 defmodule Charlist.Accounts.Commands.CreateUser do
-  alias Charlist.Repo
   alias Charlist.Accounts.Entities.User
+  alias Charlist.Repo
 
   def process(attrs) do
     %User{}
