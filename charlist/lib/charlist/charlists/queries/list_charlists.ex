@@ -15,7 +15,7 @@ defmodule Charlist.Charlists.Queries.ListCharlists do
     |> with_intelligence(params)
     |> with_nickname(params)
     |> select_fields()
-    |> Repo.all()
+    |> Repo.paginate(params)
   end
 
   defp by_user(query, user_id) do

@@ -6,6 +6,20 @@ defmodule CharlistWeb.V1.CharlistController do
 
   action_fallback(CharlistWeb.FallbackController)
 
+  defmodule CharlistIndexSearch do
+    use Params.Schema, %{
+      wisdom: :integer,
+      strength: :integer,
+      dexterity: :integer,
+      charisma: :integer,
+      constitution: :integer,
+      intelligence: :integer,
+      nickname: :string,
+      page!: :integer,
+      page_size!: :integer
+    }
+  end
+
   def index(conn, params) do
     user = conn.assigns.current_user
     charlists = Charlists.list_charlists(user, params)
