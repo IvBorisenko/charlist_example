@@ -53,11 +53,11 @@ defmodule CharlistWeb.Router do
   # end
 
   scope "/api/v1", CharlistWeb.V1 do
-    pipe_through [:api, :user_auth]
+    pipe_through [:api]
 
     post "/users", UserController, :create
 
-    pipe_through [:ensure_auth]
+    pipe_through [:user_auth, :ensure_auth]
 
     resources "/charlists", CharlistController, only: [:index, :show, :create, :update]
     resources "/items", ItemController, only: [:index, :show]

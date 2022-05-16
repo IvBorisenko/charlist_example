@@ -19,13 +19,6 @@ defmodule Charlist.Accounts.Services.Guardian do
     end
   end
 
-  #   def user_id_from_token(token) do
-  #     case Guardian.decode_and_verify(token) do
-  #       {:ok, %{"sub" => "User:" <> id}} -> {:ok, String.to_integer(id)}
-  #       _ -> {:error, :wrong_token}
-  #     end
-  #   end
-
   def subject_for_token(%User{id: id} = _user, _claims) do
     {:ok, "User:#{id}"}
   end

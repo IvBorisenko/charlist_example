@@ -11,12 +11,6 @@ defmodule CharlistWeb.V1.UserController do
       email!: :string,
       password!: :string
     }
-
-    def data_as_map(params) do
-      with {:ok, attrs} <- data(params) do
-        {:ok, Map.take(attrs, [:email, :password])}
-      end
-    end
   end
 
   def create(conn, attrs) do

@@ -1,6 +1,6 @@
 defmodule Charlist.Accounts.Guardian.Pipeline do
   use Guardian.Plug.Pipeline,
-    otp_app: :oz_api,
+    otp_app: :charlist,
     error_handler: Charlist.Accounts.Guardian.ErrorHandler,
     module: Charlist.Accounts.Services.Guardian
 
