@@ -19,11 +19,17 @@ defmodule CharlistWeb.V1.CharlistControllerTest do
       |> json_response(200)
 
     assert response ==
-             [
-               %{"id" => charlist_1.id, "nickname" => charlist_1.nickname},
-               %{"id" => charlist_2.id, "nickname" => charlist_2.nickname},
-               %{"id" => charlist_3.id, "nickname" => charlist_3.nickname}
-             ]
+             %{
+               "entries" => [
+                 %{"id" => charlist_1.id, "nickname" => charlist_1.nickname},
+                 %{"id" => charlist_2.id, "nickname" => charlist_2.nickname},
+                 %{"id" => charlist_3.id, "nickname" => charlist_3.nickname}
+               ],
+               "page_number" => 1,
+               "page_size" => 5,
+               "total_entries" => 3,
+               "total_pages" => 1
+             }
   end
 
   test "show/2 returns list charlists", %{conn: conn, user: user} do

@@ -1,4 +1,7 @@
 defmodule Charlist.Charlists.Queries.ListCharlists do
+  @moduledoc """
+   Provide lists of charlists with pagination and filters.
+  """
   import Ecto.Query, only: [from: 2]
 
   alias Charlist.Charlists.Entities.CharlistEntity

@@ -22,8 +22,8 @@ defmodule CharlistWeb.V1.CharlistController do
 
   def index(conn, %{"current_user" => current_user} = params) do
     with {:ok, params} <- ApplyParams.do_apply(IndexSearchParams, params) do
-      charlists = Charlists.list_charlists(current_user, params)
-      render(conn, "index.json", %{charlists: charlists})
+      page = Charlists.list_charlists(current_user, params)
+      render(conn, "index.json", %{page: page})
     end
   end
 
