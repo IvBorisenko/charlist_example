@@ -24,6 +24,7 @@ defmodule CharlistWeb do
       import Plug.Conn
       import CharlistWeb.Gettext
 
+      alias CharlistWeb.ApplyParams
       alias CharlistWeb.Router.Helpers, as: Routes
       alias Plug.Conn
     end

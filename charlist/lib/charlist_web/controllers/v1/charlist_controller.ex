@@ -6,7 +6,7 @@ defmodule CharlistWeb.V1.CharlistController do
 
   action_fallback(CharlistWeb.FallbackController)
 
-  defmodule CharlistIndexSearch do
+  defmodule IndexSearchParams do
     use Params.Schema, %{
       wisdom: :integer,
       strength: :integer,
@@ -20,18 +20,16 @@ defmodule CharlistWeb.V1.CharlistController do
     }
   end
 
-  def index(conn, params) do
-    user = conn.assigns.current_user
-    charlists = Charlists.list_charlists(user, params)
-    render(conn, "index.json", %{charlists: charlists})
+  def index(conn, %{"current_user" => current_user} = params) do
+    with {:ok, params} <- ApplyParams.do_apply(IndexSearchParams, params) do
+      charlists = Charlists.list_charlists(current_user, params)
+      render(conn, "index.json", %{charlists: charlists})
+    end
   end
 
-  def show(conn, %{"id" => id}) do
-    user = conn.assigns.current_user
-    Charlists.get_charlist(id)
-
+  def show(conn, %{"current_user" => current_user, "id" => id}) do
     with {:ok, charlist} <- Charlists.get_charlist(id),
-         :ok <- Bodyguard.permit(CharlistPolicy, :show, user, charlist) do
+         :ok <- Bodyguard.permit(CharlistPolicy, :show, current_user, charlist) do
       render(conn, "show.json", %{charlist: charlist})
     end
   end

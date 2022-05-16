@@ -4,7 +4,9 @@ defmodule CharlistWeb.V1.ItemControllerTest do
   import CharlistWeb.Router.Helpers
 
   setup %{conn: conn} do
-    {:ok, %{conn: conn}}
+    user = insert(:user)
+    conn = as_user(conn, user)
+    {:ok, %{conn: conn, user: user}}
   end
 
   test "index/2 returns list items", %{conn: conn} do

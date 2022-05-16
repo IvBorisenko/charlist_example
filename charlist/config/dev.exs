@@ -9,6 +9,9 @@ config :charlist, Charlist.Repo,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
+config :charlist, Charlist.Accounts.Services.Guardian,
+  secret_key: "YlyxOIkewn18tIupgG0AyvhYMjW6s1GYrQmzJhhPIMW+EumBoSDhKjIMO+UTblYo"
+
 # For development, we disable any cache and enable
 # debugging and code reloading.
 #

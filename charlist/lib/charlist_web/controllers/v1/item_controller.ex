@@ -5,12 +5,12 @@ defmodule CharlistWeb.V1.ItemController do
 
   action_fallback(CharlistWeb.FallbackController)
 
-  def index(conn, _params) do
+  def index(conn, %{"current_user" => current_user} = _params) do
     items = Items.list_items()
     render(conn, "index.json", %{items: items})
   end
 
-  def show(conn, %{"id" => id}) do
+  def show(conn, %{"current_user" => _current_user, "id" => id}) do
     with {:ok, item} <- Items.get_item(id) do
       render(conn, "show.json", %{item: item})
     end

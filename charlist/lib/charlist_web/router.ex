@@ -15,6 +15,15 @@ defmodule CharlistWeb.Router do
     plug ProperCase.Plug.SnakeCaseParams
   end
 
+  pipeline :user_auth do
+    plug Charlist.Accounts.Guardian.Pipeline
+  end
+
+  pipeline :ensure_auth do
+    plug Guardian.Plug.EnsureAuthenticated
+    plug CharlistWeb.CurrentUserPlug
+  end
+
   scope "/", CharlistWeb do
     pipe_through :browser
 
@@ -44,7 +53,11 @@ defmodule CharlistWeb.Router do
   # end
 
   scope "/api/v1", CharlistWeb.V1 do
-    pipe_through :api
+    pipe_through [:api, :user_auth]
+
+    post "/users", UserController, :create
+
+    pipe_through [:ensure_auth]
 
     resources "/charlists", CharlistController, only: [:index, :show, :create, :update]
     resources "/items", ItemController, only: [:index, :show]

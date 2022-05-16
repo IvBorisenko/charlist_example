@@ -1,0 +1,10 @@
+defmodule Charlist.Accounts.Auth do
+  alias Charlist.Accounts.Entities.User
+  alias Charlist.Accounts.Services.Guardian
+
+  def sign_user(%User{} = user) do
+    with {:ok, access_token, refresh_token} <- Guardian.sign(user) do
+      {:ok, access_token, refresh_token}
+    end
+  end
+end

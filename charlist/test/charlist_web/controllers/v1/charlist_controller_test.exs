@@ -5,17 +5,17 @@ defmodule CharlistWeb.V1.CharlistControllerTest do
 
   setup %{conn: conn} do
     user = insert(:user)
-    conn = assign(conn, :current_user, user)
-    {:ok, %{conn: conn}}
+    conn = as_user(conn, user)
+    {:ok, %{conn: conn, user: user}}
   end
 
-  test "index/2 returns list charlists", %{conn: conn} do
-    [charlist_1, charlist_2, charlist_3] =
-      insert_list(3, :charlist, %{user: conn.assigns.current_user})
+  test "index/2 returns list charlists", %{conn: conn, user: user} do
+    [charlist_1, charlist_2, charlist_3] = insert_list(3, :charlist, %{user: user})
+    attrs = %{page: 1, page_size: 5}
 
     response =
       conn
-      |> get(charlist_path(conn, :index))
+      |> get(charlist_path(conn, :index), attrs)
       |> json_response(200)
 
     assert response ==
@@ -26,8 +26,8 @@ defmodule CharlistWeb.V1.CharlistControllerTest do
              ]
   end
 
-  test "show/2 returns list charlists", %{conn: conn} do
-    charlist = insert(:charlist, %{user: conn.assigns.current_user})
+  test "show/2 returns list charlists", %{conn: conn, user: user} do
+    charlist = insert(:charlist, %{user: user})
 
     response =
       conn
