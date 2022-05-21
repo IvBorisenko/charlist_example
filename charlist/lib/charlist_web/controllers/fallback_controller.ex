@@ -1,6 +1,7 @@
 defmodule CharlistWeb.FallbackController do
   use CharlistWeb, :controller
 
+  alias Ecto.Changeset
   alias CharlistWeb.ErrorView
 
   def call(%Conn{} = conn, {:error, :not_found}) do
@@ -15,5 +16,12 @@ defmodule CharlistWeb.FallbackController do
     |> put_status(:forbidden)
     |> put_view(ErrorView)
     |> render("403.json", message: "You are not authorized to perform this action.")
+  end
+
+  def call(%Conn{} = conn, {:error, %Changeset{} = changeset}) do
+    conn
+    |> put_status(:unprocessable_entity)
+    |> put_view(ErrorView)
+    |> render("422.json", changeset: changeset)
   end
 end
